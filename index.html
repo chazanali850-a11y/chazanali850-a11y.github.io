@@ -1,274 +1,235 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-<title>Azans Premium Wear</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azan's Clothing</title>
 
 <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
 
 body{
-margin:0;
-font-family:Georgia, serif;
-background:#e8d2b5;
-color:#3b2415;
+background:#F5F0E6;
+color:#333;
 }
-
-
-/* Top Banner */
 
 header{
-background:linear-gradient(135deg,#8b5e3c,#d8b58a);
+background:#F5F0E6;
+padding:20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:2px solid #c8a97e;
+position:sticky;
+top:0;
+}
+
+.logo{
+font-size:34px;
+font-weight:bold;
+color:#8B5A2B;
+}
+
+.menu-btn{
+font-size:30px;
+cursor:pointer;
+background:none;
+border:none;
+color:#8B5A2B;
+}
+
+.sidebar{
+height:100%;
+width:0;
+position:fixed;
+top:0;
+left:0;
+background:#8B5A2B;
+overflow-x:hidden;
+transition:.4s;
+padding-top:60px;
+}
+
+.sidebar a{
+display:block;
+padding:15px 30px;
+text-decoration:none;
 color:white;
-text-align:center;
-padding:50px 20px;
-}
-
-header h1{
-font-size:45px;
-margin:10px;
-}
-
-header p{
 font-size:20px;
 }
 
+.sidebar a:hover{
+background:#A97142;
+}
 
-
-/* Main Section */
+.closebtn{
+position:absolute;
+top:10px;
+right:20px;
+font-size:35px;
+}
 
 .hero{
 text-align:center;
 padding:60px 20px;
-background:#f5e6d3;
 }
 
-.hero h2{
-font-size:38px;
+.hero h1{
+font-size:45px;
+color:#8B5A2B;
+margin-bottom:15px;
 }
 
 .hero p{
-font-size:20px;
+font-size:22px;
+font-weight:bold;
+color:#444;
 }
 
-
-.button{
-background:#5c3a21;
-color:white;
-padding:15px 35px;
-border-radius:30px;
-text-decoration:none;
-display:inline-block;
+.highlight{
+margin-top:25px;
+font-size:24px;
+font-weight:bold;
+color:#8B5A2B;
 }
 
-
-
-/* Collection */
-
-.collection{
-padding:40px 20px;
-text-align:center;
-}
-
-
-.collection h2{
-font-size:35px;
-}
-
-
-
-.cards{
-
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:25px;
-
+padding:40px;
 }
-
-
 
 .card{
-
-background:#fff7eb;
-width:260px;
+background:white;
 padding:25px;
-border-radius:20px;
-box-shadow:0 8px 20px rgba(0,0,0,0.15);
-
+border-radius:12px;
+text-align:center;
+box-shadow:0 0 10px rgba(0,0,0,.15);
 }
 
-
-.card h3{
-
-font-size:25px;
-
+.card h2{
+color:#8B5A2B;
+margin-bottom:15px;
 }
-
 
 .card p{
-
-font-size:17px;
-
+margin-bottom:20px;
 }
 
-
-.card button{
-
-background:#8b5e3c;
+button{
+background:#8B5A2B;
 color:white;
-border:none;
 padding:12px 25px;
-border-radius:25px;
-
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
 }
 
-
-
-/* Footer */
+button:hover{
+background:#A97142;
+}
 
 footer{
-
-background:#3b2415;
-color:white;
 text-align:center;
 padding:25px;
-
+background:#8B5A2B;
+color:white;
+margin-top:30px;
 }
-
-
 </style>
-
 </head>
-
 
 <body>
 
+<div id="menu" class="sidebar">
+<a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">×</a>
+<a href="#">Western Style</a>
+<a href="#">Asian Style</a>
+<a href="#">Privacy Policy</a>
+</div>
 
 <header>
 
-<h1>Azans Premium Wear</h1>
+<button class="menu-btn" onclick="openMenu()">☰</button>
 
-<p>Luxury Collection • Timeless Fashion</p>
+<div class="logo">
+Azan's Clothing
+</div>
 
 </header>
 
-
-
 <section class="hero">
 
-<h2>Premium Style For Everyone</h2>
+<h1>Welcome From Azan Ali</h1>
 
-<p>
-Discover elegant fashion with classic designs and premium collections.
-</p>
+<p>Your Fashion, Your Style</p>
 
-
-<a class="button">
-Explore Collection
-</a>
-
+<div class="highlight">
+Pakistan's First Way of eBay Platform
+</div>
 
 </section>
 
-
-
-
-<section class="collection">
-
-
-<h2>Our Collections</h2>
-
-
-
-<div class="cards">
-
-
+<div class="container">
 
 <div class="card">
-
-<h3>Men's Wear</h3>
-
-<p>
-Premium shirts, suits, casual wear and modern fashion styles.
-</p>
-
-<button>
-View Collection
+<h2>Men Collection</h2>
+<p>Explore premium fashion for men.</p>
+<button onclick="alert('Men Collection Coming Soon!')">
+Buy Now
 </button>
-
 </div>
-
-
-
 
 <div class="card">
-
-<h3>Females Wear</h3>
-
-<p>
-Elegant dresses, modern outfits and premium fashion collection.
-</p>
-
-<button>
-View Collection
+<h2>Women's Collection</h2>
+<p>Discover beautiful fashion for women.</p>
+<button onclick="alert('Women Collection Coming Soon!')">
+Buy Now
 </button>
-
 </div>
-
-
-
 
 <div class="card">
-
-<h3>Men & Watch Collection</h3>
-
-<p>
-Classic watches and premium accessories for a luxury lifestyle.
-</p>
-
-<button>
-View Collection
+<h2>Watch Collection</h2>
+<p>Luxury watches for every style.</p>
+<button onclick="alert('Watch Collection Coming Soon!')">
+Buy Now
 </button>
-
 </div>
-
-
-
 
 <div class="card">
-
-<h3>Privacy Policy</h3>
-
-<p>
-Your privacy and customer information security is our priority.
-</p>
-
-<button>
-Read Policy
+<h2>Privacy Policy</h2>
+<p>Your privacy is important to us.</p>
+<button onclick="alert('Privacy Policy Page Coming Soon!')">
+Read More
 </button>
-
 </div>
 
-
-
 </div>
-
-
-</section>
-
-
-
 
 <footer>
 
-<p>
-© 2026 Azans Premium Wear | All Rights Reserved
-</p>
+© 2026 Azan's Clothing. All Rights Reserved.
 
 </footer>
 
+<script>
 
+function openMenu(){
+document.getElementById("menu").style.width="260px";
+}
+
+function closeMenu(){
+document.getElementById("menu").style.width="0";
+}
+
+</script>
 
 </body>
-
 </html>
