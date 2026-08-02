@@ -1,47 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Azan's Clothing</title>
+<title>Azan Premium Clothing</title>
 
 <style>
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:Arial, sans-serif;
 }
 
 body{
-background:#F5F0E6;
-color:#333;
+background:#f5efe6;
+}
+
+/* Welcome Page */
+
+#welcome{
+height:100vh;
+background:linear-gradient(rgba(255,255,255,.6),rgba(255,255,255,.6)),
+url("https://images.unsplash.com/photo-1490750967868-88aa4486c946");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.welcome-box{
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 0 20px gray;
+}
+
+.welcome-box h1{
+color:#6b3e26;
+font-size:35px;
+font-weight:bold;
+}
+
+.welcome-box p{
+font-size:20px;
+margin:15px;
+font-weight:bold;
+}
+
+.enter{
+background:#6b3e26;
+color:white;
+padding:15px 35px;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+
+/* Main Website */
+
+#store{
+display:none;
 }
 
 header{
-background:#F5F0E6;
+background:#5c3825;
 padding:20px;
 display:flex;
-align-items:center;
 justify-content:space-between;
-border-bottom:2px solid #c8a97e;
-position:sticky;
-top:0;
+align-items:center;
 }
 
 .logo{
-font-size:34px;
+color:white;
+font-size:40px;
 font-weight:bold;
-color:#8B5A2B;
 }
 
-.menu-btn{
-font-size:30px;
+.menu{
+font-size:35px;
+color:white;
 cursor:pointer;
-background:none;
-border:none;
-color:#8B5A2B;
 }
+
 
 .sidebar{
 height:100%;
@@ -49,127 +92,138 @@ width:0;
 position:fixed;
 top:0;
 left:0;
-background:#8B5A2B;
-overflow-x:hidden;
+background:#5c3825;
+overflow:hidden;
 transition:.4s;
 padding-top:60px;
 }
 
 .sidebar a{
 display:block;
-padding:15px 30px;
-text-decoration:none;
 color:white;
+padding:15px;
 font-size:20px;
+text-decoration:none;
 }
 
-.sidebar a:hover{
-background:#A97142;
-}
-
-.closebtn{
+.close{
 position:absolute;
-top:10px;
 right:20px;
+top:10px;
 font-size:35px;
 }
 
+
 .hero{
 text-align:center;
-padding:60px 20px;
+padding:50px;
 }
 
 .hero h1{
-font-size:45px;
-color:#8B5A2B;
-margin-bottom:15px;
+color:#6b3e26;
+font-size:34px;
 }
 
-.hero p{
-font-size:22px;
-font-weight:bold;
-color:#444;
-}
 
 .highlight{
-margin-top:25px;
-font-size:24px;
+margin-top:20px;
+font-size:22px;
 font-weight:bold;
-color:#8B5A2B;
+color:#6b3e26;
 }
 
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-padding:40px;
+
+.cards{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+padding:30px;
 }
 
 .card{
 background:white;
+width:260px;
 padding:25px;
-border-radius:12px;
 text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,.15);
+border-radius:15px;
+box-shadow:0 0 15px #bbb;
 }
 
 .card h2{
-color:#8B5A2B;
-margin-bottom:15px;
-}
-
-.card p{
-margin-bottom:20px;
+color:#6b3e26;
 }
 
 button{
-background:#8B5A2B;
+background:#6b3e26;
 color:white;
 padding:12px 25px;
 border:none;
 border-radius:8px;
+margin-top:15px;
 cursor:pointer;
-font-size:16px;
 }
 
-button:hover{
-background:#A97142;
-}
-
-footer{
-text-align:center;
-padding:25px;
-background:#8B5A2B;
-color:white;
-margin-top:30px;
-}
 </style>
+
 </head>
+
 
 <body>
 
-<div id="menu" class="sidebar">
-<a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">×</a>
-<a href="#">Western Style</a>
-<a href="#">Asian Style</a>
-<a href="#">Privacy Policy</a>
+
+<!-- Flower Welcome Page -->
+
+<div id="welcome">
+
+<div class="welcome-box">
+
+<h1>Welcome to<br>Azan Premium Clothing Store</h1>
+
+<p>Pakistan's First Way of eBay Platform</p>
+
+<button class="enter" onclick="openStore()">
+Enter Store
+</button>
+
 </div>
+
+</div>
+
+
+
+<!-- Main Store -->
+
+<div id="store">
 
 <header>
 
-<button class="menu-btn" onclick="openMenu()">☰</button>
-
 <div class="logo">
-Azan's Clothing
+Azan Premium Clothing
+</div>
+
+<div class="menu" onclick="openMenu()">
+☰
 </div>
 
 </header>
 
+
+<div id="side" class="sidebar">
+
+<a class="close" onclick="closeMenu()">×</a>
+
+<a href="#">Western Style</a>
+<a href="#">Asian Style</a>
+<a href="#">Privacy Policy</a>
+
+</div>
+
+
+
 <section class="hero">
 
-<h1>Welcome From Azan Ali</h1>
-
-<p>Your Fashion, Your Style</p>
+<h1>Welcome to Azan Premium Clothing Store</h1>
 
 <div class="highlight">
 Pakistan's First Way of eBay Platform
@@ -177,59 +231,58 @@ Pakistan's First Way of eBay Platform
 
 </section>
 
-<div class="container">
+
+
+<div class="cards">
+
 
 <div class="card">
 <h2>Men Collection</h2>
-<p>Explore premium fashion for men.</p>
-<button onclick="alert('Men Collection Coming Soon!')">
-Buy Now
-</button>
+<p>Premium men's fashion</p>
+<button>Buy Now</button>
 </div>
+
 
 <div class="card">
 <h2>Women's Collection</h2>
-<p>Discover beautiful fashion for women.</p>
-<button onclick="alert('Women Collection Coming Soon!')">
-Buy Now
-</button>
+<p>Elegant women's fashion</p>
+<button>Buy Now</button>
 </div>
+
 
 <div class="card">
 <h2>Watch Collection</h2>
-<p>Luxury watches for every style.</p>
-<button onclick="alert('Watch Collection Coming Soon!')">
-Buy Now
-</button>
+<p>Luxury watches</p>
+<button>Buy Now</button>
 </div>
 
-<div class="card">
-<h2>Privacy Policy</h2>
-<p>Your privacy is important to us.</p>
-<button onclick="alert('Privacy Policy Page Coming Soon!')">
-Read More
-</button>
-</div>
 
 </div>
 
-<footer>
 
-© 2026 Azan's Clothing. All Rights Reserved.
+</div>
 
-</footer>
+
 
 <script>
 
-function openMenu(){
-document.getElementById("menu").style.width="260px";
+function openStore(){
+document.getElementById("welcome").style.display="none";
+document.getElementById("store").style.display="block";
 }
 
+
+function openMenu(){
+document.getElementById("side").style.width="280px";
+}
+
+
 function closeMenu(){
-document.getElementById("menu").style.width="0";
+document.getElementById("side").style.width="0";
 }
 
 </script>
+
 
 </body>
 </html>
