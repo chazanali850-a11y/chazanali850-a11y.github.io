@@ -1,235 +1,466 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="logo.png">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Azan's Clothing store </title>
+<title>MERIDIAN — Made-to-order tailoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #15150f;
+    --bone: #ece7dc;
+    --clay: #6b2737;
+    --olive: #676f52;
+    --grey: #9c9585;
+    --line: rgba(21,21,15,0.14);
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bone);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--clay); color: var(--bone); }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* NAV */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(236,231,220,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 32px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+  }
+  .navlinks {
+    display: flex;
+    gap: 36px;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .navlinks a { opacity: 0.75; transition: opacity 0.25s; }
+  .navlinks a:hover { opacity: 1; }
+  .nav-cta {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    padding: 9px 18px;
+    transition: background 0.25s, color 0.25s;
+  }
+  .nav-cta:hover { background: var(--ink); color: var(--bone); }
+  @media (max-width: 780px) { .navlinks { display: none; } }
+
+  /* HERO */
+  .hero {
+    padding: 168px 32px 90px;
+    max-width: 1240px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--clay);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 26px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 22px; height: 1px;
+    background: var(--clay);
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2.8rem, 7.2vw, 6.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    max-width: 15ch;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--olive);
+  }
+  .hero-sub {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+    margin-top: 46px;
+    align-items: end;
+  }
+  .hero-copy p {
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: #3a3a30;
+    max-width: 46ch;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 30px;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bone);
+    padding: 15px 26px;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.25s;
+  }
+  .btn-primary:hover { background: var(--clay); }
+  .btn-ghost {
+    border-bottom: 1px solid var(--ink);
+    padding: 15px 2px;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Garment swatch — the signature element */
+  .swatch {
+    aspect-ratio: 3/4;
+    background:
+      repeating-linear-gradient(115deg, #7c7460 0px, #7c7460 2px, #837c68 2px, #837c68 4px),
+      linear-gradient(160deg, #8a836f, #5f5847);
+    position: relative;
+    border: 1px solid var(--ink);
+  }
+  .swatch::after {
+    content: 'WOOL 82% · SILK 18%\A HAND-FINISHED\A LOT NO. 0114-MRD';
+    white-space: pre;
+    position: absolute;
+    bottom: 14px; left: 14px; right: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: var(--bone);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+
+  /* MARQUEE STRIP */
+  .strip {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    background: var(--ink);
+    color: var(--bone);
+  }
+  .strip-track {
+    display: inline-flex;
+    gap: 40px;
+    animation: scroll 26s linear infinite;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .strip-track span { opacity: 0.7; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* PROCESS — real sequence, so numbering is justified */
+  .process {
+    padding: 110px 32px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+  .section-head p {
+    max-width: 34ch;
+    color: #3a3a30;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border-top: 1px solid var(--line);
+  }
+  .step {
+    background: var(--bone);
+    padding: 34px 26px;
+  }
+  .step .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--clay);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .step h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 1.18rem;
+    margin-bottom: 10px;
+  }
+  .step p { font-size: 0.88rem; line-height: 1.55; color: #3a3a30; }
+  @media (max-width: 900px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+
+  /* PIECES GRID */
+  .pieces {
+    padding: 0 32px 120px;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  .pieces-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .piece {
+    border: 1px solid var(--line);
+    transition: border-color 0.25s;
+  }
+  .piece:hover { border-color: var(--ink); }
+  .piece-art {
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+  }
+  .p1 .piece-art { background: linear-gradient(150deg, #b7ae98, #6b6552); }
+  .p2 .piece-art { background: linear-gradient(150deg, #736c5a, #35322a); }
+  .p3 .piece-art { background: linear-gradient(150deg, #8f5b56, #4a2c2a); }
+  .piece-tag {
+    position: absolute;
+    top: 14px; left: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--bone);
+    letter-spacing: 0.06em;
+  }
+  .piece-info {
+    padding: 18px 20px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .piece-info h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.08rem;
+    font-weight: 500;
+  }
+  .piece-info span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--grey);
+  }
+  @media (max-width: 900px) { .pieces-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .pieces-grid { grid-template-columns: 1fr; } }
+
+  /* CTA */
+  .cta {
+    background: var(--ink);
+    color: var(--bone);
+    padding: 120px 32px;
+    text-align: center;
+  }
+  .cta h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    max-width: 18ch;
+    margin: 0 auto 34px;
+    line-height: 1.1;
+  }
+  .cta .btn-primary { background: var(--bone); color: var(--ink); display: inline-block; }
+  .cta .btn-primary:hover { background: var(--clay); color: var(--bone); }
+
+  /* FOOTER */
+  footer {
+    padding: 50px 32px;
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.8rem;
+    color: var(--grey);
+    border-top: 1px solid var(--line);
+  }
+  footer .flinks { display: flex; gap: 24px; }
+
+  @media (max-width: 780px) {
+    .hero-sub { grid-template-columns: 1fr; }
+    .swatch { max-width: 200px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .strip-track { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--clay);
+    outline-offset: 3px;
+  }
 </style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
 </head>
-body{
-background:#F5F0E6;
-color:#333;
-}
-<img src="logo.png" alt="Website Logo">  
-header{
-background:#F5F0E6;
-padding:20px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-border-bottom:2px solid #c8a97e;
-position:sticky;
-top:0;
-}
-
-.logo{
-font-size:34px;
-font-weight:bold;
-color:#8B5A2B;
-}
-
-.menu-btn{
-font-size:30px;
-cursor:pointer;
-background:none;
-border:none;
-color:#8B5A2B;
-}
-
-.sidebar{
-height:100%;
-width:0;
-position:fixed;
-top:0;
-left:0;
-background:#8B5A2B;
-overflow-x:hidden;
-transition:.4s;
-padding-top:60px;
-}
-
-.sidebar a{
-display:block;
-padding:15px 30px;
-text-decoration:none;
-color:white;
-font-size:20px;
-}
-
-.sidebar a:hover{
-background:#A97142;
-}
-
-.closebtn{
-position:absolute;
-top:10px;
-right:20px;
-font-size:35px;
-}
-
-.hero{
-text-align:center;
-padding:60px 20px;
-}
-
-.hero h1{
-font-size:45px;
-color:#8B5A2B;
-margin-bottom:15px;
-}
-
-.hero p{
-font-size:22px;
-font-weight:bold;
-color:#444;
-}
-
-.highlight{
-margin-top:25px;
-font-size:24px;
-font-weight:bold;
-color:#8B5A2B;
-}
-
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-padding:40px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:12px;
-text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,.15);
-}
-
-.card h2{
-color:#8B5A2B;
-margin-bottom:15px;
-}
-
-.card p{
-margin-bottom:20px;
-}
-
-button{
-background:#8B5A2B;
-color:white;
-padding:12px 25px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
-}
-
-button:hover{
-background:#A97142;
-}
-
-footer{
-text-align:center;
-padding:25px;
-background:#8B5A2B;
-color:white;
-margin-top:30px;
-}
-</style>
-</head>
-
 <body>
 
-<div id="menu" class="sidebar">
-<a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">×</a>
-<a href="#">Western Style</a>
-<a href="#">Asian Style</a>
-<a href="#">Privacy Policy</a>
-</div>
-
 <header>
-
-<button class="menu-btn" onclick="openMenu()">☰</button>
-
-<div class="logo">
-Azan's Clothing
-</div>
-
+  <nav>
+    <div class="logo">MERIDIAN</div>
+    <div class="navlinks">
+      <a href="#process">Process</a>
+      <a href="#pieces">Pieces</a>
+      <a href="#">Fabrics</a>
+      <a href="#">Journal</a>
+    </div>
+    <a href="#" class="nav-cta">Book a fitting</a>
+  </nav>
 </header>
 
 <section class="hero">
-
-<h1>Welcome From Azan Ali</h1>
-
-<p>Your Fashion, Your Style</p>
-
-<div class="highlight">
-Pakistan's First Way of eBay Platform
-</div>
-
+  <div class="eyebrow">Made-to-order — Studio No. 4, est. 2019</div>
+  <h1>Clothing built to <em>your</em> measurements, not the season's.</h1>
+  <div class="hero-sub">
+    <div class="hero-copy">
+      <p>Every piece starts with a fitting, not a size chart. We cut, stitch, and finish each garment by hand in small runs — nothing sits in a warehouse waiting to go out of style.</p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary">Book a fitting</a>
+        <a href="#pieces" class="btn-ghost">See the current run</a>
+      </div>
+    </div>
+    <div class="swatch"></div>
+  </div>
 </section>
 
-<div class="container">
-
-<div class="card">
-<h2>Men Collection</h2>
-<p>Explore premium fashion for men.</p>
-<button onclick="alert('Men Collection Coming Soon!')">
-Buy Now
-</button>
+<div class="strip">
+  <div class="strip-track">
+    <span>Small-batch tailoring</span><span>·</span>
+    <span>Natural fibers only</span><span>·</span>
+    <span>Fitted in three weeks</span><span>·</span>
+    <span>Repaired for life</span><span>·</span>
+    <span>Small-batch tailoring</span><span>·</span>
+    <span>Natural fibers only</span><span>·</span>
+    <span>Fitted in three weeks</span><span>·</span>
+    <span>Repaired for life</span><span>·</span>
+  </div>
 </div>
 
-<div class="card">
-<h2>Women's Collection</h2>
-<p>Discover beautiful fashion for women.</p>
-<button onclick="alert('Women Collection Coming Soon!')">
-Buy Now
-</button>
-</div>
+<section class="process" id="process">
+  <div class="section-head">
+    <h2>From fitting to finish</h2>
+    <p>Four steps, three weeks, one garment made for the body that's actually wearing it.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <span class="num">01</span>
+      <h3>Fitting</h3>
+      <p>An hour in the studio. We take 30-plus measurements and talk through how you'll actually wear the piece.</p>
+    </div>
+    <div class="step">
+      <span class="num">02</span>
+      <h3>Pattern</h3>
+      <p>Your measurements become a paper pattern, cut and adjusted by hand before any fabric is touched.</p>
+    </div>
+    <div class="step">
+      <span class="num">03</span>
+      <h3>Construction</h3>
+      <p>Cut, sewn, and pressed in the studio. Every seam is finished, never overlocked and forgotten.</p>
+    </div>
+    <div class="step">
+      <span class="num">04</span>
+      <h3>Second fitting</h3>
+      <p>One adjustment fitting before it's yours — and free alterations for as long as you own it.</p>
+    </div>
+  </div>
+</section>
 
-<div class="card">
-<h2>Watch Collection</h2>
-<p>Luxury watches for every style.</p>
-<button onclick="alert('Watch Collection Coming Soon!')">
-Buy Now
-</button>
-</div>
+<section class="pieces" id="pieces">
+  <div class="section-head">
+    <h2>Current run</h2>
+    <p>Twelve pieces, cut in limited fabric lots. Once a lot sells out, it's gone.</p>
+  </div>
+  <div class="pieces-grid">
+    <div class="piece p1">
+      <div class="piece-art"><span class="piece-tag">LOT 0108</span></div>
+      <div class="piece-info"><h3>The Cropped Wool Coat</h3><span>$640</span></div>
+    </div>
+    <div class="piece p2">
+      <div class="piece-art"><span class="piece-tag">LOT 0111</span></div>
+      <div class="piece-info"><h3>Straight-Leg Trouser</h3><span>$310</span></div>
+    </div>
+    <div class="piece p3">
+      <div class="piece-art"><span class="piece-tag">LOT 0114</span></div>
+      <div class="piece-info"><h3>Raw-Edge Blazer</h3><span>$480</span></div>
+    </div>
+  </div>
+</section>
 
-<div class="card">
-<h2>Privacy Policy</h2>
-<p>Your privacy is important to us.</p>
-<button onclick="alert('Privacy Policy Page Coming Soon!')">
-Read More
-</button>
-</div>
-
-</div>
+<section class="cta">
+  <h2>Your first fitting is free — and there's no obligation after.</h2>
+  <a href="#" class="btn-primary">Book your fitting</a>
+</section>
 
 <footer>
-
-© 2026 Azan's Clothing. All Rights Reserved.
-
+  <span>© 2026 Meridian Studio</span>
+  <div class="flinks">
+    <a href="#">Instagram</a>
+    <a href="#">Journal</a>
+    <a href="#">Contact</a>
+  </div>
 </footer>
 
-<script>
-
-function openMenu(){
-document.getElementById("menu").style.width="260px";
-}
-
-function closeMenu(){
-document.getElementById("menu").style.width="0";
-}
-
-</script>
-
 </body>
-</html>
+  </html>
+  
