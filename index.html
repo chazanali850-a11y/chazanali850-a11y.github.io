@@ -380,14 +380,45 @@
   overlay.addEventListener('click', closeMenu);
 
   // Product data — replace 'img' links with your own real product photos any time
-  const products = [
-    {cat:"Men's Collection", name:"Classic Fit Shirt", price:"Rs. 2,499", desc:"Soft cotton, tailored fit", img:"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&q=80"},
-    {cat:"Women's Collection", name:"Flowy Summer Dress", price:"Rs. 3,299", desc:"Lightweight, breathable fabric", img:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&q=80"},
-    {cat:"Fashion & Accessories", name:"Leather Wrist Watch", price:"Rs. 4,999", desc:"Minimal dial, genuine strap", img:"https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=500&q=80"},
-    {cat:"Men's Collection", name:"Denim Jacket", price:"Rs. 5,499", desc:"Vintage wash, relaxed cut", img:"https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80"},
-    {cat:"Men's Collection", name:"Chino Trousers", price:"Rs. 2,899", desc:"Slim fit, all-day comfort", img:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500&q=80"},
-    {cat:"Fashion & Accessories", name:"Leather Handbag", price:"Rs. 6,299", desc:"Structured silhouette", img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=500&q=80"},
-  ];
+  const sheetURL = "https://docs.google.com/spreadsheets/d/1Teou8hJVoU9K33SHwHxL7Qt7FRYv_ZIDSW5rSJgH3Fs/gviz/tq?tqx=out:csv";
+
+const grid = document.getElementById('productGrid');
+
+fetch(sheetURL)
+  .then(response => response.text())
+  .then(csv => {
+    const rows = csv.trim().split(/\r?\n/);
+
+    rows.slice(1).forEach(row => {
+      const columns = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+        .map(value => value.replace(/^"|"$/g, '').replace(/""/g, '"').trim());
+
+      if (columns.length >= 4 && columns[0]) {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        card.innerHTML = `
+          <img class="thumb" src="${columns[3]}" alt="${columns[0]}" loading="lazy">
+          <div class="info">
+            <div class="cat">ZAVÉRA Collection</div>
+            <h3>${columns[0]}</h3>
+            <div class="desc">${columns[2]}</div>
+            <div class="price">Rs. ${columns[1]}</div>
+          </div>
+          <div class="actions">
+            <div class="btn btn-buy">Buy Now</div>
+            <div class="btn btn-cart">Add to Cart</div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      }
+    });
+  })
+  .catch(error => {
+    console.error("Products could not be loaded:", error);
+    grid.innerHTML = "<p style='text-align:center;'>Products loading failed.</p>";
+  });
 
   const grid = document.getElementById('productGrid');
   products.forEach(p=>{
